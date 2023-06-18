@@ -27,6 +27,13 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
+    ; Assertion: Check if the updated value is equal to 47
+    cmp dword [edi], 47
+
+    ; Conditional jump instruction that transfers the control flow to the assertion_failed label
+    ; if the previous comparison (cmp) resulted in a "not equal" condition.
+    jne assertion_failed
+
     ; Set the value to subtract
     mov esi, 10
 
@@ -39,8 +46,11 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
-    ; Assertion: Check if the updated value is equal to 47
-    cmp dword [edi], 47
+    ; Assertion: Check if the updated value is equal to 37
+    cmp dword [edi], 37
+
+    ; Conditional jump instruction that transfers the control flow to the assertion_failed label
+    ; if the previous comparison (cmp) resulted in a "not equal" condition.
     jne assertion_failed
 
     ; Exit the program
