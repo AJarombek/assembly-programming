@@ -1,0 +1,29 @@
+name: NASM x86 Assembly
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: archlinux/base
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install NASM
+        run: sudo pacman -Sy --noconfirm nasm
+
+      - name: Build Assembly Code
+        run: |
+          nasm -f elf64 atomic.asm -o atomic.o
+          ld atomic.o -o atomic
+
+      - name: Execute Assembly Code
+        run: ./atomic
