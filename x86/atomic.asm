@@ -19,6 +19,9 @@ section .text
 extern __atomix_fetch_add
 extern __atomix_fetch_sub
 
+extern write
+extern printf
+
 main:
     ; Set the value to add
     mov esi, 5
@@ -56,7 +59,7 @@ main:
 
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
-    
+
     ; Print the value in edi
     mov eax, edi
     mov edi, format_message
