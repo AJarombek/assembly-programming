@@ -4,15 +4,22 @@ Various dialects of assembly programming code, tested and run using GitHub actio
 
 ### Commands
 
-** Setup on macOS **
+**Setup on macOS**
 
 ```bash
 brew install nasm
 nasm --version
 ```
 
-** Compile and run **
+**Compile and run**
 
 ```bash
 nasm -f elf64 atomic.asm -o atomic.o
 ```
+
+### Files
+
+| Filename  | Description                                     |
+|-----------|-------------------------------------------------|
+| `.github` | GitHub Actions for CI/CD pipelines.             |
+| `x86`     | Code samples in the NASM x86 assembly language. |
