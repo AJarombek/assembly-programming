@@ -21,6 +21,7 @@ jobs:
         run: pacman -Sy --noconfirm nasm
 
       - name: Build Assembly Code
+        working-directory: ./x86
         run: |
           nasm -f elf64 atomic.asm -o atomic.o
           ld atomic.o -o atomic
