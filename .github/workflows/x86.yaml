@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install NASM
-        run: sudo pacman -Sy --noconfirm nasm
+        run: pacman -Sy --noconfirm nasm
 
       - name: Build Assembly Code
         run: |
