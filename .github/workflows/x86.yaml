@@ -29,4 +29,5 @@ jobs:
           gcc atomic.o -o atomic -no-pie
 
       - name: Execute Assembly Code
+        working-directory: ./x86
         run: ./atomic
