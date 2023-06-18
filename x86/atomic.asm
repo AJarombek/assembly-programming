@@ -47,7 +47,7 @@ main:
     ; You can access the updated value and use it as needed
 
     ; Assertion: Check if the updated value is equal to 37
-    cmp dword [edi], 37
+    cmp dword [edi], 32
 
     ; Conditional jump instruction that transfers the control flow to the assertion_failed label
     ; if the previous comparison (cmp) resulted in a "not equal" condition.
