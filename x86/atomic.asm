@@ -7,6 +7,9 @@ section .data
     ; The 'dd' directive creates a double word (4 bytes) containing value 42 and stores it in the variable 'value'
     value dd 42
 
+    add_error_message db 'Addition assertion failed!', 0
+    sub_error_message db 'Subtraction assertion failed!', 0
+
 section .text
     ; The 'global' directive makes the label 'main' available to the linker.
     global main
@@ -32,7 +35,7 @@ main:
 
     ; Conditional jump instruction that transfers the control flow to the assertion_failed label
     ; if the previous comparison (cmp) resulted in a "not equal" condition.
-    jne assertion_failed
+    jne assertion_failed_add
 
     ; Set the value to subtract
     mov esi, 10
@@ -47,19 +50,44 @@ main:
     ; You can access the updated value and use it as needed
 
     ; Assertion: Check if the updated value is equal to 37
-    cmp dword [edi], 32
+    cmp dword [edi], 37
 
     ; Conditional jump instruction that transfers the control flow to the assertion_failed label
     ; if the previous comparison (cmp) resulted in a "not equal" condition.
-    jne assertion_failed
+    jne assertion_failed_sub
 
     ; Exit the program
     mov eax, 1
     xor ebx, ebx
     int 0x80
 
-assertion_failed:
+assertion_failed_add:
     ; Assertion failed, handle the failure (e.g., print an error message, exit program with an error code)
+
+    ; Print an error message
+    mov eax, 4  ; write system call
+    mov ebx, 1  ; file descriptor (stdout)
+    mov ecx, sub_error_message
+    mov edx, 27 ; message length
+    int 0x80
+
+    ; Exit the program with an error code
+    mov eax, 1
+    xor ebx, ebx
+    inc ebx
+    int 0x80
+
+assertion_failed_sub:
+    ; Assertion failed, handle the failure (e.g., print an error message, exit program with an error code)
+
+    ; Print an error message
+    mov eax, 4  ; write system call
+    mov ebx, 1  ; file descriptor (stdout)
+    mov ecx, sub_error_message
+    mov edx, 30 ; message length
+    int 0x80
+
+    ; Exit the program with an error code
     mov eax, 1
     xor ebx, ebx
     inc ebx
