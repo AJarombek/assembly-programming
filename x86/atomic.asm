@@ -10,6 +10,8 @@ section .data
     add_error_message db 'Addition assertion failed!', 0
     sub_error_message db 'Subtraction assertion failed!', 0
 
+    format_message db 'Value in edi: %d', 10, 0
+
 section .text
     ; The 'global' directive makes the label 'main' available to the linker.
     global main
@@ -30,6 +32,12 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
+    ; Print the value in edi
+    mov eax, edi
+    mov edi, format_message
+    xor ebx, ebx
+    call printf
+
     ; Assertion: Check if the updated value is equal to 47
     cmp dword [edi], 47
 
@@ -48,6 +56,12 @@ main:
 
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
+    
+    ; Print the value in edi
+    mov eax, edi
+    mov edi, format_message
+    xor ebx, ebx
+    call printf
 
     ; Assertion: Check if the updated value is equal to 37
     cmp dword [edi], 37
