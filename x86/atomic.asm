@@ -40,6 +40,15 @@ __atomix_fetch_sub:
     ret
 
 _start:
+    ; Call the main function
+    call main
+
+    ; Exit the program
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+main:
     ; Set the value to add
     mov esi, 5
 
@@ -64,7 +73,5 @@ _start:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
-    ; Exit the program
-    mov eax, 1
-    xor ebx, ebx
-    int 0x80
+    ; Return from the main function
+    ret
