@@ -7,10 +7,6 @@ section .data
     ; The 'dd' directive creates a double word (4 bytes) containing value 42 and stores it in the variable 'value'
     value dd 42
 
-    ; Example memory address to pass as the destination pointer
-    ; The 'dd' directive creates a double word (4 bytes) containing value 0 and stores it in the variable 'ptr'
-    ptr_value dd 0
-
 section .text
     ; The 'global' directive makes the label '_start' available to the linker.
     global _start
@@ -40,6 +36,9 @@ __atomix_fetch_sub:
     ret
 
 _start:
+    ; Set up stack frame if needed
+    mov ebp, esp
+
     ; Call the main function
     call main
 
