@@ -39,9 +39,20 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
+    ; Assertion: Check if the updated value is equal to 47
+    cmp dword [edi], 47
+    jne assertion_failed
+
     ; Exit the program
     mov eax, 1
     xor ebx, ebx
+    int 0x80
+
+assertion_failed:
+    ; Assertion failed, handle the failure (e.g., print an error message, exit program with an error code)
+    mov eax, 1
+    xor ebx, ebx
+    inc ebx
     int 0x80
 
 __atomix_fetch_add:
