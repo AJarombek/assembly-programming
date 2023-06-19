@@ -50,7 +50,7 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
-    ; Assertion: Check if the updated value is equal to 37
+    ; Assertion: Check if the updated value is equal to 30
     cmp dword [edi], 30
 
     ; Conditional jump instruction that transfers the control flow to the assertion_failed label
@@ -110,10 +110,14 @@ __atomix_fetch_sub:
     ; Atomically subtracts the value in esi from the memory location pointed by rdi.
     ; The lock prefix ensures that the operation is atomic.
     ; The original value stored at the memory location is returned in eax.
-    lock xadd [rdi], esi
+    ; Load the original value into eax
+    mov eax, [rdi]
 
-    ; Negates the value in esi.
-    neg esi
+    ; Subtract the value in esi from eax atomically
+    lock sub [rdi], esi
+
+    ; Move the result to edi
+    mov edi, eax
 
     ; Returns control from the function.
     ret
