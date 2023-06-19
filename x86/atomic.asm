@@ -4,13 +4,12 @@
 
 section .data
     ; Example integer value to operate on
-    ; The 'dd' directive creates a double word (4 bytes) containing value 42 and stores it in the variable 'value'
-    value dd 42
+    ; The 'dd' directive creates a double word (4 bytes) containing value 42 and stores it in the variable 'add_value'
+    add_value dd 42
+    sub_value dd 40
 
     add_error_message db 'Addition assertion failed!', 0
     sub_error_message db 'Subtraction assertion failed!', 0
-
-    format_message db 'Value in edi: %d', 10, 0
 
 section .text
     ; The 'global' directive makes the label 'main' available to the linker.
@@ -19,27 +18,18 @@ section .text
 extern __atomix_fetch_add
 extern __atomix_fetch_sub
 
-extern write
-extern printf
-
 main:
     ; Set the value to add
     mov esi, 5
 
     ; Load the memory address of the value
-    mov edi, value
+    mov edi, add_value
 
     ; Invoke __atomix_fetch_add
     call __atomix_fetch_add
 
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
-
-    ; Print the value in edi
-    mov eax, edi
-    mov edi, format_message
-    xor ebx, ebx
-    call printf
 
     ; Assertion: Check if the updated value is equal to 47
     cmp dword [edi], 47
@@ -52,7 +42,7 @@ main:
     mov esi, 10
 
     ; Load the memory address of the value
-    mov edi, value
+    mov edi, sub_value
 
     ; Invoke __atomix_fetch_sub
     call __atomix_fetch_sub
@@ -60,14 +50,8 @@ main:
     ; After the call, the updated value is stored in [edi]
     ; You can access the updated value and use it as needed
 
-    ; Print the value in edi
-    mov eax, edi
-    mov edi, format_message
-    xor ebx, ebx
-    call printf
-
     ; Assertion: Check if the updated value is equal to 37
-    cmp dword [edi], 37
+    cmp dword [edi], 30
 
     ; Conditional jump instruction that transfers the control flow to the assertion_failed label
     ; if the previous comparison (cmp) resulted in a "not equal" condition.
