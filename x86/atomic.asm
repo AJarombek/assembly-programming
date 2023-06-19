@@ -47,7 +47,7 @@ assertion_failed_add:
     ; Print an error message
     mov eax, 4  ; write system call
     mov ebx, 1  ; file descriptor (stdout)
-    mov ecx, sub_error_message
+    mov ecx, add_error_message
     mov edx, 27 ; message length
     int 0x80
 
