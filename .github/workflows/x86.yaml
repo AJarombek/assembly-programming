@@ -28,12 +28,12 @@ jobs:
       - name: Build Arithmetic Assembly Code
         working-directory: ./x86
         run: |
-          nasm -f elf64 atomic.asm -o atomic.o
-          gcc atomic.o -o atomic -no-pie
+          nasm -f elf64 arithmetic.asm -o arithmetic.o
+          gcc arithmetic.o -o arithmetic -no-pie
 
       - name: Execute Arithmetic Assembly Code
         working-directory: ./x86
-        run: ./atomic
+        run: ./arithmetic
 
       - name: Build Atomic Assembly Code
         working-directory: ./x86
