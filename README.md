@@ -15,6 +15,7 @@ nasm --version
 
 ```bash
 nasm -f elf64 atomic.asm -o atomic.o
+nasm -f elf64 arithmetic.asm -o arithmetic.o
 ```
 
 ### Files
