@@ -1,2 +1,5 @@
 .idea
 **/*.o
+x86/arithmetic
+x86/atomic
+x86/guess_number
