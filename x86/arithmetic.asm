@@ -5,7 +5,7 @@
 section .data
     num1 dd 5
     num2 dd 10
-    expected dd 16
+    expected dd 15
     result dd 0
 
     ; Error message to print if the addition assertion fails
