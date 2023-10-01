@@ -7,15 +7,22 @@ Various dialects of assembly programming code, tested and run using GitHub actio
 **Setup on macOS**
 
 ```bash
-brew install nasm
-nasm --version
+cd x86
+docker-compose up --build
+docker exec -it x86_arch_linux_1 /bin/bash
 ```
 
-**Compile and run**
+**Compile and run (on Docker)**
 
 ```bash
-nasm -f elf64 atomic.asm -o atomic.o
+# Compile the assembly file
 nasm -f elf64 arithmetic.asm -o arithmetic.o
+
+# Link the object file
+gcc arithmetic.o -o arithmetic -no-pie
+
+# Run the executable
+./arithmetic
 ```
 
 ### Files
@@ -24,3 +31,13 @@ nasm -f elf64 arithmetic.asm -o arithmetic.o
 |-----------|-------------------------------------------------|
 | `.github` | GitHub Actions for CI/CD pipelines.             |
 | `x86`     | Code samples in the NASM x86 assembly language. |
+
+### Version History
+
+**[V.1.0.0](https://github.com/AJarombek/assembly-programming/tree/v1.0.0) - Basic x86/NASM Programs**
+
+> Release Date: October 1st, 2023
+
+* Create basic x86 assembly programs using NASM (for future reference).
+* Create a Dockerfile for running NASM on archlinux.
+* GitHub Actions for testing and running the assembly programs.

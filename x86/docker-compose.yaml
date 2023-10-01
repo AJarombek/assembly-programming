@@ -1,0 +1,13 @@
+# Docker compose file for the Arch Linux/NASM x86 Assembly Docker image
+# Author: Andrew Jarombek
+# Date: 10/1/2023
+
+version: '3'
+services:
+  arch_linux:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      # Mount the current directory to /src
+      - .:/src
